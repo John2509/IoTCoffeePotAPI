@@ -1,23 +1,31 @@
-interface IAppRequest {
-	coffeeMaker_ID: number;
-}
-
-interface ICoffeeMakerRequest extends IAppRequest {
-	coffeMaker_IP: string;
-}
+import {AppController, CoffeeMakerController, IAppRequest, ICoffeeMakerRequest} from "../controller";
 
 const Routes = (app: any) => {
-
-	app.get("/", (req: any, res: any) => {
-		console.log(req);
-		res.send("Hello world!");
+	app.get("/waterLevel", (req: { query: IAppRequest }, res: any) => {
+		if (req && req.query) {
+			AppController.checkWaterLevel(req.query);
+			res.sendStatus(200);
+		} else {
+			res.sendStatus(400);
+		}
 	});
 
-	app.get("/waterLevel", (req: { query: IAppRequest }, res: any) => {
-		if (req && req.query && req.query.coffeeMaker_ID) {
-			console.log(req.query.coffeeMaker_ID);
+	app.get("/coffee", (req: { query: IAppRequest }, res: any) => {
+		if (req && req.query) {
+			AppController.makeCoffee(req.query);
+			res.sendStatus(200);
+		} else {
+			res.sendStatus(400);
 		}
-		res.send("42");
+	});
+
+	app.post("/coffeeMaker", (req: { body: ICoffeeMakerRequest}, res: any) => {
+		if (req && req.body) {
+			CoffeeMakerController.RegisterCoffeeMaker(req.body);
+			res.sendStatus(200);
+		} else {
+			res.sendStatus(400);
+		}
 	});
 };
 

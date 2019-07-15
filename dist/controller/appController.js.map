@@ -1,0 +1,1 @@
+{"version":3,"file":"appController.js","sourceRoot":"","sources":["../../src/controller/appController.ts"],"names":[],"mappings":";;AAIA,MAAM,aAAa,GAAG;IACrB,UAAU,EAAE,CAAC,GAAgB,EAAE,EAAE;QAChC,OAAO,CAAC,GAAG,CAAC,eAAe,EAAE,GAAG,CAAC,CAAC;IACnC,CAAC;IAED,eAAe,EAAE,CAAC,GAAgB,EAAE,EAAE;QACrC,OAAO,CAAC,GAAG,CAAC,qBAAqB,EAAE,GAAG,CAAC,CAAC;IACzC,CAAC;CACD,CAAC;AAEM,sCAAa"}

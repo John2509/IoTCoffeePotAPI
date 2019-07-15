@@ -1,15 +1,33 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const controller_1 = require("../controller");
 const Routes = (app) => {
-    app.get("/", (req, res) => {
-        console.log(req);
-        res.send("Hello world!");
-    });
     app.get("/waterLevel", (req, res) => {
-        if (req && req.query && req.query.coffeeMaker_ID) {
-            console.log(req.query.coffeeMaker_ID);
+        if (req && req.query) {
+            controller_1.AppController.checkWaterLevel(req.query);
+            res.sendStatus(200);
         }
-        res.send("42");
+        else {
+            res.sendStatus(400);
+        }
+    });
+    app.get("/coffee", (req, res) => {
+        if (req && req.query) {
+            controller_1.AppController.makeCoffee(req.query);
+            res.sendStatus(200);
+        }
+        else {
+            res.sendStatus(400);
+        }
+    });
+    app.post("/coffeeMaker", (req, res) => {
+        if (req && req.body) {
+            controller_1.CoffeeMakerController.RegisterCoffeeMaker(req.body);
+            res.sendStatus(200);
+        }
+        else {
+            res.sendStatus(400);
+        }
     });
 };
 exports.routes = Routes;
