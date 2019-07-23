@@ -4,8 +4,8 @@ const controller_1 = require("../controller");
 const Routes = (app) => {
     app.get("/waterLevel", (req, res) => {
         if (req && req.query) {
-            controller_1.AppController.checkWaterLevel(req.query);
-            res.sendStatus(200);
+            const ip = controller_1.AppController.checkWaterLevel(req.query);
+            res.status(200).json({ ip });
         }
         else {
             res.sendStatus(400);
@@ -13,8 +13,8 @@ const Routes = (app) => {
     });
     app.get("/coffee", (req, res) => {
         if (req && req.query) {
-            controller_1.AppController.makeCoffee(req.query);
-            res.sendStatus(200);
+            const ip = controller_1.AppController.makeCoffee(req.query);
+            res.status(200).json({ ip });
         }
         else {
             res.sendStatus(400);
