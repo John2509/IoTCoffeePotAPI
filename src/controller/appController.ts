@@ -1,22 +1,23 @@
 import { Database } from "../data";
+import { ICoffeeSocketApi } from "../socket";
 
 interface IAppRequest {
 	coffeeMaker_ID: number;
 }
 
 const AppController = {
-	makeCoffee: (req: IAppRequest): string => {
-		const database: Database = Database.getInstance<string>();
-		const ip = database.getData(req.coffeeMaker_ID);
-		console.log("Make Coffee: ", req, ip);
-		return ip;
+	makeCoffee: (req: IAppRequest, callback?: (msg: string) => void): void => {
+		const database: Database<ICoffeeSocketApi> = Database.getInstance();
+		const coffeMaker = database.getData(req.coffeeMaker_ID);
+		console.log("Make Coffee: ", req);
+		coffeMaker.MakeCoffee(callback);
 	},
 
-	checkWaterLevel: (req: IAppRequest): string => {
-		const database: Database = Database.getInstance<string>();
-		const ip = database.getData(req.coffeeMaker_ID);
-		console.log("Check Water Level: ", req, ip);
-		return ip;
+	checkWaterLevel: (req: IAppRequest, callback?: (msg: string) => void): void => {
+		const database: Database<ICoffeeSocketApi> = Database.getInstance();
+		const coffeMaker = database.getData(req.coffeeMaker_ID);
+		console.log("Check Water Level: ", req);
+		coffeMaker.CheckWater(callback);
 	}
 };
 

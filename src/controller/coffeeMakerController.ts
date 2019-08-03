@@ -1,15 +1,16 @@
 import { Database } from "../data";
+import { ICoffeeSocketApi } from "../socket";
 
 interface ICoffeeMakerRequest {
 	coffeeMaker_ID: number;
-	coffeeMaker_IP: string;
+	coffeeMaker_Socket: ICoffeeSocketApi;
 }
 
 const CoffeeMakerController = {
 	RegisterCoffeeMaker: (req: ICoffeeMakerRequest) => {
-		console.log("New Coffee Maker IP: ", req);
-		const database: Database = Database.getInstance<string>();
-		database.setData(req.coffeeMaker_ID, req.coffeeMaker_IP);
+		console.log("New Coffee Maker ID: ", req.coffeeMaker_ID);
+		const database: Database = Database.getInstance();
+		database.setData(req.coffeeMaker_ID, req.coffeeMaker_Socket);
 	}
 };
 

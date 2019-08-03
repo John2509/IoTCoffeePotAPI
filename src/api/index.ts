@@ -1,10 +1,10 @@
-import { AppController, CoffeeMakerController, IAppRequest, ICoffeeMakerRequest } from "../controller";
+import { AppController, IAppRequest } from "../controller";
 
 const Routes = (app: any) => {
+
 	app.get("/waterLevel", (req: { query: IAppRequest }, res: any) => {
 		if (req && req.query) {
-			const ip = AppController.checkWaterLevel(req.query);
-			res.status(200).json({ip});
+			AppController.checkWaterLevel(req.query, (msg: string) => res.json({msg}));
 		} else {
 			res.sendStatus(400);
 		}
@@ -12,17 +12,7 @@ const Routes = (app: any) => {
 
 	app.get("/coffee", (req: { query: IAppRequest }, res: any) => {
 		if (req && req.query) {
-			const ip = AppController.makeCoffee(req.query);
-			res.status(200).json({ip});
-		} else {
-			res.sendStatus(400);
-		}
-	});
-
-	app.post("/coffeeMaker", (req: { body: ICoffeeMakerRequest }, res: any) => {
-		if (req && req.body) {
-			CoffeeMakerController.RegisterCoffeeMaker(req.body);
-			res.sendStatus(200);
+			AppController.makeCoffee(req.query, (msg: string) => res.json({msg}));
 		} else {
 			res.sendStatus(400);
 		}
