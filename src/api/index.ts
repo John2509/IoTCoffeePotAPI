@@ -17,6 +17,14 @@ const Routes = (app: any) => {
 			res.sendStatus(400);
 		}
 	});
+
+	app.get("/filter", (req: { query: IAppRequest }, res: any) => {
+		if (req && req.query) {
+			AppController.cleanFilter(req.query, (msg: string) => res.json({msg}));
+		} else {
+			res.sendStatus(400);
+		}
+	});
 };
 
 export { Routes as routes };

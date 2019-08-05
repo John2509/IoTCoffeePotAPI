@@ -18,6 +18,13 @@ const AppController = {
 		const coffeMaker = database.getData(req.coffeeMaker_ID);
 		console.log("Check Water Level: ", req);
 		coffeMaker.CheckWater(callback);
+	},
+
+	cleanFilter: (req: IAppRequest, callback?: (msg: string) => void): void => {
+		const database: Database<ICoffeeSocketApi> = Database.getInstance();
+		const coffeMaker = database.getData(req.coffeeMaker_ID);
+		console.log("Clear Filter: ", req);
+		coffeMaker.CleanFilter(callback);
 	}
 };
 
