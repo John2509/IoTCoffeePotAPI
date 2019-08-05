@@ -1,5 +1,6 @@
 import * as WebSocket from "ws";
 import { CoffeeMakerController, ICoffeeMakerRequest } from "../controller";
+import { CoffeeMaker } from "../model";
 
 const Socket = (wss: WebSocket.Server) => {
 	wss.on("connection", (ws: WebSocket) => {
@@ -14,8 +15,9 @@ const Socket = (wss: WebSocket.Server) => {
 			if (id) {
 				const req: ICoffeeMakerRequest = {
 					coffeeMaker_ID: id,
-					coffeeMaker_Socket: coffeeSocketApiMaker(ws),
+					coffeeMaker_Socket: new CoffeeMaker(coffeeSocketApiMaker(ws)),
 				};
+				console.log("New Coffee Maker ID: ", req.coffeeMaker_ID);
 				CoffeeMakerController.RegisterCoffeeMaker(req);
 			} else {
 				ws.once("message", login);

@@ -1,5 +1,5 @@
 import { Database } from "../data";
-import { ICoffeeSocketApi } from "../socket";
+import { CoffeeMaker } from "../model";
 
 interface IAppRequest {
 	coffeeMaker_ID: number;
@@ -7,24 +7,21 @@ interface IAppRequest {
 
 const AppController = {
 	makeCoffee: (req: IAppRequest, callback?: (msg: string) => void): void => {
-		const database: Database<ICoffeeSocketApi> = Database.getInstance();
+		const database: Database<CoffeeMaker> = Database.getInstance();
 		const coffeMaker = database.getData(req.coffeeMaker_ID);
-		console.log("Make Coffee: ", req);
-		coffeMaker.MakeCoffee(callback);
+		if (coffeMaker) { coffeMaker.makeCoffee(callback); } else { callback("Cafeteira não existe"); }
 	},
 
 	checkWaterLevel: (req: IAppRequest, callback?: (msg: string) => void): void => {
-		const database: Database<ICoffeeSocketApi> = Database.getInstance();
+		const database: Database<CoffeeMaker> = Database.getInstance();
 		const coffeMaker = database.getData(req.coffeeMaker_ID);
-		console.log("Check Water Level: ", req);
-		coffeMaker.CheckWater(callback);
+		if (coffeMaker) { coffeMaker.checkWater(callback); } else { callback("Cafeteira não existe"); }
 	},
 
 	cleanFilter: (req: IAppRequest, callback?: (msg: string) => void): void => {
-		const database: Database<ICoffeeSocketApi> = Database.getInstance();
+		const database: Database<CoffeeMaker> = Database.getInstance();
 		const coffeMaker = database.getData(req.coffeeMaker_ID);
-		console.log("Clear Filter: ", req);
-		coffeMaker.CleanFilter(callback);
+		if (coffeMaker) { coffeMaker.cleanFilter(callback); } else { callback("Cafeteira não existe"); }
 	}
 };
 
